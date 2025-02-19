@@ -1,0 +1,11 @@
+@import "modern-normalize.css";
+
+:root {
+  --text: #4c4f69;
+  --background: #eff1f5;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+}

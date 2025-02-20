@@ -8,4 +8,37 @@
 body {
   background-color: var(--background);
   color: var(--text);
+
+  max-width: 50rem;
+
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+header {
+  height: 9rem;
+  background-color: red;
+  text-align: center;
+  font-size: 1.7rem;
+}
+
+main {
+  height: 100vh;
+  background-color: green;
+}
+
+.book-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  margin: 1rem 2rem;
+}
+
+.book {
+  background-color: aquamarine;
+  max-width: 13rem;
+  min-height: 15rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2rem 1rem 1rem 1rem 1rem;
 }

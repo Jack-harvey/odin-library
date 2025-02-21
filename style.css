@@ -31,13 +31,14 @@ main {
 .book-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  grid-auto-rows: 17rem;
   margin: 1rem 2rem;
 }
 
 .book {
   background-color: aquamarine;
   max-width: 13rem;
-  min-height: 15rem;
+  max-height: 15rem;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 2rem 1rem 1rem 1rem 1rem;

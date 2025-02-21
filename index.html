@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </head>
   <body>
     <header>
       <h1>The Great Library of Alexandria</h1>
     </header>
-    <main>
+    <main id="mainEl">
       <div class="book-container">
         <div class="book">
           <span class="title">The Hobbit</span>
@@ -64,5 +64,43 @@
         <button type="button">+</button>
       </div>
     </toolbar>
+    <form>
+      <div>
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Nineteen Eighty-Four"
+        />
+      </div>
+      <div>
+        <label for="author">Author</label>
+        <input
+          type="text"
+          id="author"
+          name="author"
+          placeholder="George Orwell"
+        />
+      </div>
+      <div>
+        <label for="genre">Genre</label>
+        <input
+          type="text"
+          id="genre"
+          name="genre"
+          placeholder="Science Fiction"
+        />
+      </div>
+      <div>
+        <label for="page-count">number of pages</label>
+        <input
+          type="number"
+          id="page-count"
+          name="page-count"
+          placeholder="328"
+        />
+      </div>
+    </form>
   </body>
 </html>

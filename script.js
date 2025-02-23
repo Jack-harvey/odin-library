@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   formElement.addEventListener("submit", (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     bookFormSubmit(e);
   });
 });

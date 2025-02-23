@@ -43,3 +43,13 @@ main {
   grid-template-columns: 1fr;
   grid-template-rows: 2rem 1rem 1rem 1rem 1rem;
 }
+
+#newBookModal {
+  width: 48ch;
+  border: none;
+}
+
+#newBookModal::backdrop {
+  background-color: black;
+  opacity: 0.4;
+}

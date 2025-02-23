@@ -1,5 +1,8 @@
 const mainElement = document.querySelector("body");
 const formElement = document.querySelector("#newBookForm");
+const openModalButton = document.querySelector(".open-modal");
+const closeModalButton = document.querySelector(".close-modal");
+const newBookModal = document.querySelector("#newBookModal");
 const library = [];
 let bookId = 0;
 
@@ -37,7 +40,15 @@ function bookFormSubmit(event) {
   }
 }
 
-function buttonPressed(target) {}
+function buttonPressed(target) {
+  let classList = target.classList;
+  if (classList.contains("open-modal")) {
+    newBookModal.showModal();
+  }
+  if (classList.contains("close-modal")) {
+    newBookModal.close();
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   mainElement.addEventListener("click", (e) => {

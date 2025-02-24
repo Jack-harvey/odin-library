@@ -2,6 +2,7 @@ const mainElement = document.querySelector("body");
 const formElement = document.querySelector("#newBookForm");
 const openModalButton = document.querySelector(".open-modal");
 const closeModalButton = document.querySelector(".close-modal");
+const bookContainer = document.querySelector(".book-container");
 const newBookModal = document.querySelector("#newBookModal");
 const library = [];
 let bookId = 0;
@@ -20,8 +21,14 @@ function addBookToLibrary(title, author, genre, pageCount) {
   library.push(new Book(title, author, genre, pageCount));
 }
 
-function convertDateToFriendlyDate(date) {}
-function convertDateToFriendlyTime(date) {}
+function convertDateToFriendlyDate(date) {
+  let friendlyDate = `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`;
+  return friendlyDate;
+}
+function convertDateToFriendlyTime(date) {
+  let friendlyTime = `${date.getHours()}:${date.getMinutes()}`;
+  return friendlyTime;
+}
 
 function formValidator(title, author, genre, pageCount) {
   if (title === "" || author === "" || genre === "" || isNaN(pageCount)) {
@@ -38,6 +45,7 @@ function bookFormSubmit(event) {
   if (formValidator(titleSubmit, authorSubmit, genreSubmit, pageCountSubmit)) {
     addBookToLibrary(titleSubmit, authorSubmit, genreSubmit, pageCountSubmit);
   }
+  addBooksInLibraryToPage();
 }
 
 function buttonPressed(target) {
@@ -48,6 +56,61 @@ function buttonPressed(target) {
   if (classList.contains("close-modal")) {
     newBookModal.close();
   }
+}
+
+function clearAllBooksFromPage() {
+  while (bookContainer.firstChild) {
+    bookContainer.removeChild(bookContainer.lastChild);
+  }
+}
+
+function addABookToPage(book) {
+  const bookTitle = document.createElement("div");
+  const bookAuthor = document.createElement("div");
+  const bookGenre = document.createElement("div");
+  const bookPageCount = document.createElement("div");
+  const bookDateTime = document.createElement("div");
+  const dateAdded = document.createElement("span");
+  const timeAdded = document.createElement("span");
+  const bookElement = document.createElement("div");
+  const deleteButton = document.createElement("button");
+
+  bookTitle.classList.add("title");
+  bookAuthor.classList.add("author");
+  bookGenre.classList.add("genre");
+  bookPageCount.classList.add("page-count");
+  bookDateTime.classList.add("date-time");
+  dateAdded.classList.add("date-added");
+  timeAdded.classList.add("time-added");
+  bookElement.classList.add("book");
+
+  bookTitle.appendChild(document.createTextNode(`${book.title}`));
+  bookAuthor.appendChild(document.createTextNode(`${book.author}`));
+  bookGenre.appendChild(document.createTextNode(`${book.genre}`));
+  bookPageCount.appendChild(document.createTextNode(`${book.pageCount}`));
+  dateAdded.appendChild(
+    document.createTextNode(`${convertDateToFriendlyDate(book.dateAdded)}`)
+  );
+  timeAdded.appendChild(
+    document.createTextNode(`${convertDateToFriendlyTime(book.dateAdded)}`)
+  );
+  deleteButton.appendChild(document.createTextNode("Delete"));
+
+  bookDateTime.appendChild(dateAdded);
+  bookDateTime.appendChild(timeAdded);
+
+  bookElement.appendChild(bookTitle);
+  bookElement.appendChild(bookAuthor);
+  bookElement.appendChild(bookGenre);
+  bookElement.appendChild(bookPageCount);
+  bookElement.appendChild(bookDateTime);
+  bookElement.appendChild(deleteButton);
+  bookContainer.appendChild(bookElement);
+}
+
+function addBooksInLibraryToPage() {
+  clearAllBooksFromPage();
+  library.forEach((book) => addABookToPage(book));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -63,6 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-addBookToLibrary("xtitle", "xauthor", "xgenre", "xpagecount");
-addBookToLibrary("Ytitle", "Yauthor", "Ygenre", "Ypagecount");
-addBookToLibrary("Ztitle", "Zauthor", "Zgenre", "Zpagecount");
+addBookToLibrary("mistborn", "sanderson", "fantasy", "1300");
+addBookToLibrary("wheel o' time", "robbie jordo", "fantasy", "800");
+addBookToLibrary("gardens of moon", "erikson", "fantasy", "1200");

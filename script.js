@@ -4,6 +4,7 @@ const openModalButton = document.querySelector(".open-modal");
 const closeModalButton = document.querySelector(".close-modal");
 const bookContainer = document.querySelector(".book-container");
 const newBookModal = document.querySelector("#newBookModal");
+const tableHead = document.querySelector(".table-head");
 const library = [];
 let bookId = 0;
 
@@ -23,9 +24,6 @@ function addBookToLibrary(title, author, genre, pageCount) {
 
 function convertDateToFriendlyDate(date) {
   return date.format("DD/MM/YYYY");
-}
-function convertDateToFriendlyTime(date) {
-  return date.format("HH:mm:ss");
 }
 
 function formValidator(title, author, genre, pageCount) {
@@ -64,25 +62,36 @@ function clearAllBooksFromPage() {
 
 function addABookToPage(book) {
   const friendlyDate = convertDateToFriendlyDate(book.dateAdded);
-  const friendlyTime = convertDateToFriendlyTime(book.dateAdded);
-  const bookElement = document.createElement("div");
+  const bookElement = document.createElement("tr");
   bookElement.classList.add("book");
   bookElement.innerHTML = `
-  <span class="title">${book.title}</span>
-  <span class="author">${book.author}</span>
-  <span class="genre">${book.genre}</span>
-  <span class="page-count">${book.pageCount}</span>
-          <div class="date-time">
-            <span class="date-added">${friendlyDate}</span>
-            <span class="time-added">${friendlyTime}</span>
-          </div>
-  <button>delete</button>
+ <td>${book.title}</td>
+          <td>${book.author}</td>
+          <td>${book.genre}</td>
+          <td>${book.pageCount}</td>
+          <td>${friendlyDate}</td>
+          <td>delete</td>
   `;
   bookContainer.appendChild(bookElement);
 }
 
+function addTableHeaderToPage() {
+  const tableHeadEl = document.createElement("tr");
+  tableHeadEl.classList.add("table-head");
+  tableHeadEl.innerHTML = `
+          <td>title</td>
+          <td>author</td>
+          <td>genre</td>
+          <td>page-count</td>
+          <td>date-added</td>
+          <td>&nbsp;</td>
+`;
+  bookContainer.appendChild(tableHeadEl);
+}
+
 function addBooksInLibraryToPage() {
   clearAllBooksFromPage();
+  addTableHeaderToPage();
   library.forEach((book) => addABookToPage(book));
 }
 
@@ -97,6 +106,10 @@ document.addEventListener("DOMContentLoaded", () => {
     //e.preventDefault();
     bookFormSubmit(e);
   });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  addBooksInLibraryToPage();
 });
 
 addBookToLibrary("mistborn", "sanderson", "fantasy", "1300");

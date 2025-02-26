@@ -1,4 +1,5 @@
 const mainElement = document.querySelector("body");
+const toolbarEl = document.querySelector("toolbar");
 const formElement = document.querySelector("#newBookForm");
 const openModalButton = document.querySelector(".open-modal");
 const closeModalButton = document.querySelector(".close-modal");
@@ -32,6 +33,10 @@ function addBookToLibrary(title, author, genre, pageCount) {
   library.push(new Book(title, author, genre, pageCount));
 }
 
+function removeBookFromLibrary(id) {
+  library.splice(id, 1);
+}
+
 function bookFormSubmit(event) {
   let titleSubmit = document.getElementsByName("title")[0].value;
   let authorSubmit = document.getElementsByName("author")[0].value;
@@ -51,8 +56,8 @@ function addTableHeaderToPage() {
   <td>title</td>
   <td>author</td>
   <td>genre</td>
-  <td class="number">page-count</td>
-  <td class="number">date-added</td>
+  <td class="number">pageCount</td>
+  <td class="number">dateAdded</td>
   <td>&nbsp;</td>
   `;
   bookContainer.appendChild(tableHeadEl);
@@ -69,7 +74,7 @@ function addABookToPage(book) {
   <td>${book.genre}</td>
   <td class="number">${book.pageCount}</td>
   <td class="number">${friendlyDate}</td>
-  <img class="svg" src="img/book-remove.svg">
+  <img class="svg delete-btn" src="img/book-remove.svg">
   `;
   bookContainer.appendChild(bookElement);
 }
@@ -86,30 +91,31 @@ function clearAllBooksFromPage() {
   }
 }
 
-function buttonPressed(target) {
-  let classList = target.classList;
-  if (classList.contains("open-modal")) {
-    newBookModal.showModal();
-  }
-  if (classList.contains("close-modal")) {
-    newBookModal.close();
-  }
-}
-document.addEventListener("DOMContentLoaded", () => {
-  mainElement.addEventListener("click", (e) => {
-    buttonPressed(e.target);
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  formElement.addEventListener("submit", (e) => {
-    //e.preventDefault();
-    bookFormSubmit(e);
-  });
-});
-
 document.addEventListener("DOMContentLoaded", () => {
   addBooksInLibraryToPage();
+
+  formElement.addEventListener("submit", (e) => {
+    bookFormSubmit(e);
+  });
+
+  toolbarEl.addEventListener("click", (e) => {
+    let classList = e.target.classList;
+
+    if (classList.contains("open-modal")) {
+      newBookModal.showModal();
+    }
+    if (classList.contains("close-modal")) {
+      newBookModal.close();
+    }
+  });
+
+  bookContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("delete-btn")) {
+      let bookToRemove = e.target.parentElement.dataset.id;
+      removeBookFromLibrary(bookToRemove);
+      addBooksInLibraryToPage();
+    }
+  });
 });
 
 addBookToLibrary("mistborn", "sanderson", "fantasy", "1300");

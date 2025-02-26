@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <h1>The Great Library of Alexandria</h1>
+      <h1>library</h1>
     </header>
     <main id="mainEl">
       <table class="book-container"></table>
@@ -19,48 +19,50 @@
       <div class="btn-container">
         <button type="button" class="open-modal">+</button>
       </div>
+      <dialog id="newBookModal">
+        <div class="btn-container">
+          <button type="button" class="close-modal">x</button>
+        </div>
+        <form id="newBookForm" method="dialog">
+          <div>
+            <label for="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Nineteen Eighty-Four"
+            />
+          </div>
+          <div>
+            <label for="author">Author</label>
+            <input
+              type="text"
+              id="author"
+              name="author"
+              placeholder="George Orwell"
+            />
+          </div>
+          <div>
+            <label for="genre">Genre</label>
+            <input
+              type="text"
+              id="genre"
+              name="genre"
+              placeholder="Science Fiction"
+            />
+          </div>
+          <div>
+            <label for="page-count">number of pages</label>
+            <input
+              type="number"
+              id="page-count"
+              name="page-count"
+              placeholder="328"
+            />
+          </div>
+          <button id="addBook" type="submit">Add Book</button>
+        </form>
+      </dialog>
     </toolbar>
-    <dialog id="newBookModal">
-      <button type="button" class="close-modal">x</button>
-      <form id="newBookForm" method="dialog">
-        <div>
-          <label for="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Nineteen Eighty-Four"
-          />
-        </div>
-        <div>
-          <label for="author">Author</label>
-          <input
-            type="text"
-            id="author"
-            name="author"
-            placeholder="George Orwell"
-          />
-        </div>
-        <div>
-          <label for="genre">Genre</label>
-          <input
-            type="text"
-            id="genre"
-            name="genre"
-            placeholder="Science Fiction"
-          />
-        </div>
-        <div>
-          <label for="page-count">number of pages</label>
-          <input
-            type="number"
-            id="page-count"
-            name="page-count"
-            placeholder="328"
-          />
-        </div>
-        <button id="addBook" type="submit">Add Book</button>
-      </form>
-    </dialog>
   </body>
 </html>

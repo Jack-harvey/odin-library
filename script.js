@@ -64,8 +64,9 @@ function addABookToPage(book) {
   const friendlyDate = convertDateToFriendlyDate(book.dateAdded);
   const bookElement = document.createElement("tr");
   bookElement.classList.add("book");
+  bookElement.dataset.id = book.id;
   bookElement.innerHTML = `
- <td>${book.title}</td>
+          <td>${book.title}</td>
           <td>${book.author}</td>
           <td>${book.genre}</td>
           <td class="number">${book.pageCount}</td>

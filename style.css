@@ -8,6 +8,10 @@
   --overlay: #6c7086;
   --red: #f38ba8;
   --green: #a6e3a1;
+  --textColorSVG: invert(86%) sepia(6%) saturate(1149%) hue-rotate(192deg)
+    brightness(101%) contrast(91%);
+  --redColorSVG: invert(66%) sepia(28%) saturate(810%) hue-rotate(298deg)
+    brightness(96%) contrast(97%);
 }
 
 body {
@@ -43,6 +47,16 @@ main {
   font-weight: bold;
   border-bottom: 1px solid var(--text);
   margin-bottom: 1rem;
+}
+
+.svg {
+  filter: var(--textColorSVG);
+  align-self: center;
+  width: 1.5rem;
+}
+
+.svg:hover {
+  filter: var(--redColorSVG);
 }
 
 tr {

@@ -69,7 +69,7 @@ function addABookToPage(book) {
   <td>${book.genre}</td>
   <td class="number">${book.pageCount}</td>
   <td class="number">${friendlyDate}</td>
-  <td>delete</td>
+  <img class="svg" src="img/book-remove.svg">
   `;
   bookContainer.appendChild(bookElement);
 }

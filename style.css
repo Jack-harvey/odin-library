@@ -1,8 +1,13 @@
 @import "modern-normalize.css";
 
 :root {
-  --text: #4c4f69;
-  --background: #eff1f5;
+  --text: #cdd6f4;
+  --background: #1e1e2e;
+  --mantle: #181825;
+  --crust: #11111b;
+  --overlay: #6c7086;
+  --red: #f38ba8;
+  --green: #a6e3a1;
 }
 
 body {
@@ -18,14 +23,16 @@ body {
 
 header {
   height: 9rem;
-  background-color: red;
+  background-color: var(--background);
   text-align: center;
   font-size: 1.7rem;
 }
 
 main {
-  height: 100vh;
-  background-color: green;
+  height: 80vh;
+  background-color: var(--crust);
+  border-radius: 7px;
+  padding: 2rem;
 }
 
 .book-container {
@@ -36,10 +43,32 @@ tr {
   display: grid;
   grid-template-columns: repeat(5, 1fr) 2rem;
   grid-template-rows: 2rem;
-  color: black;
+  color: var(--text);
 }
+
 .table-head {
   font-weight: bold;
+  border-bottom: 1px solid var(--text);
+  margin-bottom: 1rem;
+}
+
+td {
+  align-self: center;
+  margin-left: 5px;
+}
+
+td.number {
+  justify-self: end;
+  margin-right: 2rem;
+}
+
+table tr:nth-child(even) {
+  background-color: var(--mantle);
+}
+
+table tr:hover {
+  background-color: var(--overlay);
+  color: var(--mantle);
 }
 
 /* .book {

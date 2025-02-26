@@ -68,8 +68,8 @@ function addABookToPage(book) {
  <td>${book.title}</td>
           <td>${book.author}</td>
           <td>${book.genre}</td>
-          <td>${book.pageCount}</td>
-          <td>${friendlyDate}</td>
+          <td class="number">${book.pageCount}</td>
+          <td class="number">${friendlyDate}</td>
           <td>delete</td>
   `;
   bookContainer.appendChild(bookElement);
@@ -82,8 +82,8 @@ function addTableHeaderToPage() {
           <td>title</td>
           <td>author</td>
           <td>genre</td>
-          <td>page-count</td>
-          <td>date-added</td>
+          <td class="number">page-count</td>
+          <td class="number">date-added</td>
           <td>&nbsp;</td>
 `;
   bookContainer.appendChild(tableHeadEl);

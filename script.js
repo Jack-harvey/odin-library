@@ -35,6 +35,18 @@ function addBookToLibrary(title, author, genre, pageCount) {
 
 function removeBookFromLibrary(id) {
   library.splice(id, 1);
+  recalculateId(id);
+}
+
+function recalculateId(startingArrayPosition) {
+  // for each item in array starting at position that was removed, id is -1 of id
+  for (let i = 0; i <= library.length - 1; i++) {
+    if (i < startingArrayPosition) {
+      continue;
+    } else {
+      library[i].id = i;
+    }
+  }
 }
 
 function bookFormSubmit(event) {

@@ -85,8 +85,50 @@ table tr:hover {
   color: var(--mantle);
 }
 
+button.open-modal {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0px;
+  background-color: var(--green);
+  border-radius: 6px;
+  position: fixed;
+  top: 170px;
+  right: 570px;
+  z-index: 1;
+}
+
+button.close-modal {
+  width: 2rem;
+  height: 2rem;
+  padding: 0px;
+  background-color: var(--red);
+  border-radius: 6px;
+}
+
+dialog {
+  background-color: var(--background);
+  color: var(--text);
+  /* display: grid;
+  grid-template-rows: 3rem 1fr; */
+}
+
+form > div {
+  display: grid;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  input {
+    width: 40ch;
+  }
+}
+
+#addBook {
+  background-color: var(--green);
+  border-radius: 6px;
+  padding: 5px 10px;
+}
+
 #newBookModal {
-  width: 48ch;
+  width: 47ch;
   border: none;
 }
 

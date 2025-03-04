@@ -91,10 +91,13 @@ button.open-modal {
   padding: 0px;
   background-color: var(--green);
   border-radius: 6px;
-  position: fixed;
+  position: relative;
+  left: 810px;
+  bottom: 820px;
+  /* position: fixed;
   top: 170px;
   right: 570px;
-  z-index: 1;
+  z-index: 1; */
 }
 
 button.close-modal {
@@ -106,10 +109,16 @@ button.close-modal {
 }
 
 dialog {
+  padding: 0px;
+}
+
+.modal-content {
   background-color: var(--background);
   color: var(--text);
-  /* display: grid;
-  grid-template-rows: 3rem 1fr; */
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+  display: grid;
+  grid-template-rows: 3rem 1fr;
 }
 
 form > div {

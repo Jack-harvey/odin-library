@@ -37,6 +37,9 @@ main {
   background-color: var(--crust);
   border-radius: 7px;
   padding: 2rem;
+  overflow-y: scroll;
+  scrollbar-color: var(--overlay) var(--mantle);
+  scrollbar-width: thin;
 }
 
 .book-container {
@@ -92,8 +95,8 @@ button.open-modal {
   background-color: var(--green);
   border-radius: 6px;
   position: relative;
-  left: 810px;
-  bottom: 820px;
+  left: 805px;
+  bottom: 860px;
   /* position: fixed;
   top: 170px;
   right: 570px;

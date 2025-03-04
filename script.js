@@ -44,6 +44,14 @@ function recalculateId() {
   });
 }
 
+function appendLongNames(name) {
+  if (name.length <= 16) {
+    return name;
+  }
+  shortName = name.substring(0, 13) + "...";
+  return shortName;
+}
+
 function bookFormSubmit(event) {
   let titleSubmit = document.getElementsByName("title")[0].value;
   let authorSubmit = document.getElementsByName("author")[0].value;
@@ -76,8 +84,8 @@ function addABookToPage(book) {
   bookElement.classList.add("book");
   bookElement.dataset.id = book.id;
   bookElement.innerHTML = `
-  <td>${book.title}</td>
-  <td>${book.author}</td>
+  <td>${appendLongNames(book.title)}</td>
+  <td>${appendLongNames(book.author)}</td>
   <td>${book.genre}</td>
   <td class="number">${book.pageCount}</td>
   <td class="number">${friendlyDate}</td>
@@ -125,6 +133,54 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-addBookToLibrary("mistborn", "sanderson", "fantasy", "1300");
-addBookToLibrary("wheel o' time", "robbie jordo", "fantasy", "800");
-addBookToLibrary("gardens of moon", "erikson", "fantasy", "1200");
+addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", "Fiction", 218);
+addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "Fiction", 281);
+addBookToLibrary("1984", "George Orwell", "Dystopian", 328);
+addBookToLibrary("Moby-Dick", "Herman Melville", "Adventure", 635);
+addBookToLibrary("Pride and Prejudice", "Jane Austen", "Romance", 279);
+addBookToLibrary("The Catcher in the Rye", "J.D. Salinger", "Fiction", 277);
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310);
+addBookToLibrary(
+  "Harry Potter and the Sorcerer's Stone",
+  "J.K. Rowling",
+  "Fantasy",
+  309
+);
+addBookToLibrary("The Hunger Games", "Suzanne Collins", "Dystopian", 374);
+addBookToLibrary("The Da Vinci Code", "Dan Brown", "Mystery", 454);
+addBookToLibrary("The Alchemist", "Paulo Coelho", "Adventure", 208);
+addBookToLibrary("The Fault in Our Stars", "John Green", "Young Adult", 313);
+addBookToLibrary("The Chronicles of Narnia", "C.S. Lewis", "Fantasy", 778);
+addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", "Fantasy", 1178);
+addBookToLibrary("A Game of Thrones", "George R.R. Martin", "Fantasy", 694);
+addBookToLibrary("The Shining", "Stephen King", "Horror", 659);
+addBookToLibrary("The Book Thief", "Markus Zusak", "Historical Fiction", 584);
+addBookToLibrary("The Girl on the Train", "Paula Hawkins", "Thriller", 395);
+addBookToLibrary("Gone Girl", "Gillian Flynn", "Thriller", 432);
+addBookToLibrary("Catch-22", "Joseph Heller", "Satire", 453);
+addBookToLibrary("Brave New World", "Aldous Huxley", "Dystopian", 311);
+addBookToLibrary("The Road", "Cormac McCarthy", "Post-apocalyptic", 287);
+addBookToLibrary("The Giver", "Lois Lowry", "Dystopian", 179);
+addBookToLibrary(
+  "The Secret Garden",
+  "Frances Hodgson Burnett",
+  "Children's",
+  331
+);
+addBookToLibrary("The Help", "Kathryn Stockett", "Historical Fiction", 522);
+addBookToLibrary(
+  "A Tale of Two Cities",
+  "Charles Dickens",
+  "Historical Fiction",
+  489
+);
+addBookToLibrary("The Outsiders", "S.E. Hinton", "Young Adult", 192);
+addBookToLibrary("The Night Circus", "Erin Morgenstern", "Fantasy", 387);
+addBookToLibrary("Little Women", "Louisa May Alcott", "Fiction", 759);
+addBookToLibrary("Fifty Shades of Grey", "E.L. James", "Romance", 514);
+addBookToLibrary(
+  "The Kite Runner",
+  "Khaled Hosseini",
+  "Historical Fiction",
+  371
+);

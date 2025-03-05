@@ -88,6 +88,11 @@ table tr:hover {
   color: var(--mantle);
 }
 
+tr.table-head:hover {
+  background-color: var(--crust);
+  color: var(--text);
+}
+
 button.open-modal {
   width: 2.5rem;
   height: 2.5rem;
@@ -95,12 +100,8 @@ button.open-modal {
   background-color: var(--green);
   border-radius: 6px;
   position: relative;
-  left: 805px;
-  bottom: 860px;
-  /* position: fixed;
-  top: 170px;
-  right: 570px;
-  z-index: 1; */
+  left: 806px;
+  top: 68px;
 }
 
 button.close-modal {

@@ -110,34 +110,55 @@ button.close-modal {
   padding: 0px;
   background-color: var(--red);
   border-radius: 6px;
+  margin-top: 0.5rem;
 }
 
-dialog {
-  padding: 0px;
-}
-
-.modal-content {
-  background-color: var(--background);
-  color: var(--text);
-  display: grid;
-  grid-template-rows: 3rem 1fr;
-  display: grid;
-  grid-template-rows: 3rem 1fr;
-}
-
-form > div {
-  display: grid;
-  margin-bottom: 1rem;
-  margin-left: 1rem;
-  input {
-    width: 40ch;
-  }
+.modal-content > .btn-container {
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 #addBook {
   background-color: var(--green);
   border-radius: 6px;
   padding: 5px 10px;
+  margin-bottom: 1rem;
+}
+
+dialog {
+  padding: 0px;
+  border-radius: 6px;
+}
+
+.modal-content {
+  background-color: var(--crust);
+  color: var(--text);
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form > div {
+  display: grid;
+  margin-bottom: 1rem;
+  input {
+    width: 40ch;
+    background-color: var(--background);
+    border: none;
+    height: 1.5rem;
+    color: var(--text);
+    padding-left: 5px;
+    border-radius: 6px;
+  }
+}
+
+form > div > label {
+  padding-left: 5px;
 }
 
 #newBookModal {
@@ -147,5 +168,5 @@ form > div {
 
 #newBookModal::backdrop {
   background-color: black;
-  opacity: 0.4;
+  opacity: 0.7;
 }

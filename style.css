@@ -30,6 +30,11 @@ header {
   background-color: var(--background);
   text-align: center;
   font-size: 1.7rem;
+  color: var(--green);
+}
+
+toolbar {
+  height: 0px;
 }
 
 main {

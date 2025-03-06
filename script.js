@@ -158,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   formElement.addEventListener("submit", (e) => {
     bookFormSubmit(e);
+    formElement.reset();
   });
 
   mainElement.addEventListener("click", (e) => {
@@ -168,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (classList.contains("close-modal")) {
       newBookModal.close();
+      formElement.reset();
     }
   });
 

@@ -68,6 +68,12 @@ function addTableHeaderToPage() {
   bookContainer.appendChild(tableHeadEl);
 }
 
+function sanitizeText(string) {
+  var temp = document.createElement("div");
+  temp.textContent = string;
+  return temp.innerHTML;
+}
+
 function addABookToPage(book) {
   let booksPositionInArray = library.findIndex(
     (b) => b.title === `${book.title}`
@@ -77,9 +83,9 @@ function addABookToPage(book) {
   bookElement.classList.add("book");
   bookElement.dataset.arrayPosition = booksPositionInArray;
   bookElement.innerHTML = `
-  <td>${appendLongNames(book.title)}</td>
-  <td>${appendLongNames(book.author)}</td>
-  <td>${book.genre}</td>
+  <td>${sanitizeText(appendLongNames(book.title))}</td>
+  <td>${sanitizeText(appendLongNames(book.author))}</td>
+  <td>${sanitizeText(book.genre)}</td>
   <td class="number">${book.pageCount}</td>
   <td class="number">${friendlyDate}</td>
   <img class="svg delete-btn" src="img/book-remove.svg">

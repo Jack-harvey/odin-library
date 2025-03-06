@@ -8,25 +8,25 @@ const newBookModal = document.querySelector("#newBookModal");
 const tableHead = document.querySelector(".table-head");
 const library = [];
 
-function Book(title, author, genre, pageCount) {
+const Book = function (title, author, genre, pageCount) {
   this.title = title;
   this.author = author;
   this.genre = genre;
   this.pageCount = pageCount;
   this.dateAdded = dayjs();
-}
+};
 
-function convertDateToFriendlyDate(date) {
+const convertDateToFriendlyDate = function convertDateToFriendlyDate(date) {
   return date.format("DD/MM/YYYY");
-}
+};
 
-function formValidator(title, author, genre, pageCount) {
+const formValidator = function formValidator(title, author, genre, pageCount) {
   if (title === "" || author === "" || genre === "" || isNaN(pageCount)) {
     return false;
   } else return true;
-}
+};
 
-function addBookToLibrary(title, author, genre, pageCount) {
+const addBookToLibrary = function (title, author, genre, pageCount) {
   library.push(
     new Book(
       sanitizeText(title),
@@ -35,21 +35,21 @@ function addBookToLibrary(title, author, genre, pageCount) {
       pageCount
     )
   );
-}
+};
 
-function removeBookFromLibrary(arrayPosition) {
+const removeBookFromLibrary = function (arrayPosition) {
   library.splice(arrayPosition, 1);
-}
+};
 
-function appendLongNames(name) {
+const appendLongNames = function (name) {
   if (name.length <= 16) {
     return name;
   }
   shortName = name.substring(0, 13) + "...";
   return shortName;
-}
+};
 
-function bookFormSubmit(event) {
+const bookFormSubmit = function (event) {
   let titleSubmit = document.getElementsByName("title")[0].value;
   let authorSubmit = document.getElementsByName("author")[0].value;
   let genreSubmit = document.getElementsByName("genre")[0].value;
@@ -59,9 +59,9 @@ function bookFormSubmit(event) {
     addBookToLibrary(titleSubmit, authorSubmit, genreSubmit, pageCountSubmit);
   }
   addBooksInLibraryToPage();
-}
+};
 
-function addTableHeaderToPage() {
+const addTableHeaderToPage = function () {
   const tableHeadEl = document.createElement("tr");
   tableHeadEl.classList.add("table-head");
   tableHeadEl.innerHTML = `
@@ -73,15 +73,15 @@ function addTableHeaderToPage() {
   <td>&nbsp;</td>
   `;
   bookContainer.appendChild(tableHeadEl);
-}
+};
 
-function sanitizeText(string) {
+const sanitizeText = function (string) {
   var temp = document.createElement("div");
   temp.textContent = string;
   return temp.innerHTML;
-}
+};
 
-function addABookToPage(book) {
+const addABookToPage = function (book) {
   let booksPositionInArray = library.findIndex(
     (b) => b.title === `${book.title}`
   );
@@ -98,21 +98,21 @@ function addABookToPage(book) {
   <img class="svg delete-btn" src="img/book-remove.svg">
   `;
   bookContainer.appendChild(bookElement);
-}
+};
 
-function addBooksInLibraryToPage() {
+const addBooksInLibraryToPage = function () {
   clearAllBooksFromPage();
   addTableHeaderToPage();
   library.forEach((book) => addABookToPage(book));
-}
+};
 
-function clearAllBooksFromPage() {
+const clearAllBooksFromPage = function () {
   while (bookContainer.firstChild) {
     bookContainer.removeChild(bookContainer.lastChild);
   }
-}
+};
 
-function addALotOfBooksToThePage() {
+const addALotOfBooksToThePage = function () {
   addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", "Fiction", 218);
   addBookToLibrary("To Kill a Mockingbird", "Harper Lee", "Fiction", 281);
   addBookToLibrary("1984", "George Orwell", "Dystopian", 328);
@@ -164,7 +164,7 @@ function addALotOfBooksToThePage() {
     "Historical Fiction",
     371
   );
-}
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   addBooksInLibraryToPage();

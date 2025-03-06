@@ -7,7 +7,6 @@ const bookContainer = document.querySelector(".book-container");
 const newBookModal = document.querySelector("#newBookModal");
 const tableHead = document.querySelector(".table-head");
 const library = [];
-let bookId = 0;
 
 function Book(title, author, genre, pageCount) {
   this.title = title;
@@ -15,8 +14,6 @@ function Book(title, author, genre, pageCount) {
   this.genre = genre;
   this.pageCount = pageCount;
   this.dateAdded = dayjs();
-  this.id = bookId;
-  bookId++;
 }
 
 function convertDateToFriendlyDate(date) {
@@ -33,15 +30,8 @@ function addBookToLibrary(title, author, genre, pageCount) {
   library.push(new Book(title, author, genre, pageCount));
 }
 
-function removeBookFromLibrary(id) {
-  library.splice(id, 1);
-  recalculateId();
-}
-
-function recalculateId() {
-  library.forEach((book, index) => {
-    book.id = index;
-  });
+function removeBookFromLibrary(arrayPosition) {
+  library.splice(arrayPosition, 1);
 }
 
 function appendLongNames(name) {
@@ -79,10 +69,13 @@ function addTableHeaderToPage() {
 }
 
 function addABookToPage(book) {
+  let booksPositionInArray = library.findIndex(
+    (b) => b.title === `${book.title}`
+  );
   const friendlyDate = convertDateToFriendlyDate(book.dateAdded);
   const bookElement = document.createElement("tr");
   bookElement.classList.add("book");
-  bookElement.dataset.id = book.id;
+  bookElement.dataset.arrayPosition = booksPositionInArray;
   bookElement.innerHTML = `
   <td>${appendLongNames(book.title)}</td>
   <td>${appendLongNames(book.author)}</td>
@@ -180,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   bookContainer.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete-btn")) {
-      let bookToRemove = e.target.parentElement.dataset.id;
+      let bookToRemove = e.target.parentElement.dataset.arrayPosition;
       removeBookFromLibrary(bookToRemove);
       addBooksInLibraryToPage();
     }

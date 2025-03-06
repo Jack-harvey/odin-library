@@ -27,7 +27,14 @@ function formValidator(title, author, genre, pageCount) {
 }
 
 function addBookToLibrary(title, author, genre, pageCount) {
-  library.push(new Book(title, author, genre, pageCount));
+  library.push(
+    new Book(
+      sanitizeText(title),
+      sanitizeText(author),
+      sanitizeText(genre),
+      pageCount
+    )
+  );
 }
 
 function removeBookFromLibrary(arrayPosition) {
@@ -83,9 +90,9 @@ function addABookToPage(book) {
   bookElement.classList.add("book");
   bookElement.dataset.arrayPosition = booksPositionInArray;
   bookElement.innerHTML = `
-  <td>${sanitizeText(appendLongNames(book.title))}</td>
-  <td>${sanitizeText(appendLongNames(book.author))}</td>
-  <td>${sanitizeText(book.genre)}</td>
+  <td>${appendLongNames(book.title)}</td>
+  <td>${appendLongNames(book.author)}</td>
+  <td>${book.genre}</td>
   <td class="number">${book.pageCount}</td>
   <td class="number">${friendlyDate}</td>
   <img class="svg delete-btn" src="img/book-remove.svg">

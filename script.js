@@ -72,11 +72,11 @@ const addTableHeaderToPage = function () {
   const tableHeadEl = document.createElement("tr");
   tableHeadEl.classList.add("table-head");
   tableHeadEl.innerHTML = `
-  <td>title</td>
-  <td>author</td>
-  <td>genre</td>
-  <td class="number">pageCount</td>
-  <td class="number">dateAdded</td>
+  <td>Title</td>
+  <td>Author</td>
+  <td>Genre</td>
+  <td class="number">Page Count</td>
+  <td class="number">Date Added</td>
   <td>&nbsp;</td>
   `;
   bookContainer.appendChild(tableHeadEl);

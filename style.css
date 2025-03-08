@@ -12,6 +12,12 @@
     brightness(101%) contrast(91%);
   --redColorSVG: invert(66%) sepia(28%) saturate(810%) hue-rotate(298deg)
     brightness(96%) contrast(97%);
+  --greenColorSVG: invert(87%) sepia(23%) saturate(538%) hue-rotate(61deg)
+    brightness(96%) contrast(87%);
+  --redColorDarkSVG: invert(66%) sepia(28%) saturate(810%) hue-rotate(298deg)
+    brightness(86%) contrast(97%);
+  --greenColorDarkSVG: invert(87%) sepia(23%) saturate(538%) hue-rotate(61deg)
+    brightness(76%) contrast(87%);
 }
 
 body {
@@ -65,11 +71,26 @@ main {
 
 .svg:hover {
   filter: var(--redColorSVG);
+  cursor: pointer;
+}
+
+.svg.read-btn.true {
+  filter: var(--greenColorSVG);
+}
+.svg.read-btn.false {
+  filter: var(--redColorSVG);
+}
+
+.svg.read-btn.true:hover {
+  filter: var(--greenColorDarkSVG);
+}
+.svg.read-btn.false:hover {
+  filter: var(--redColorDarkSVG);
 }
 
 tr {
   display: grid;
-  grid-template-columns: repeat(5, 1fr) 2rem;
+  grid-template-columns: repeat(5, 1fr) 2rem 2rem;
   grid-template-rows: 2rem;
   color: var(--text);
 }

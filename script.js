@@ -8,12 +8,14 @@ const newBookModal = document.querySelector("#newBookModal");
 const tableHead = document.querySelector(".table-head");
 const library = [];
 
-const Book = function (title, author, genre, pageCount) {
+const Book = function (title, author, genre, pageCount, read = false) {
   this.title = title;
   this.author = author;
   this.genre = genre;
   this.pageCount = pageCount;
   this.dateAdded = dayjs();
+  this.id = crypto.randomUUID();
+  this.isRead = read;
 };
 
 const convertDateToFriendlyDate = function convertDateToFriendlyDate(date) {
@@ -39,6 +41,10 @@ const addBookToLibrary = function (title, author, genre, pageCount) {
 
 const removeBookFromLibrary = function (arrayPosition) {
   library.splice(arrayPosition, 1);
+};
+
+const toggleReadStatus = function (arrayPosition) {
+  library[arrayPosition].isRead = library[arrayPosition].isRead ? false : true;
 };
 
 const appendLongNames = function (name) {
@@ -85,6 +91,9 @@ const addABookToPage = function (book) {
   let booksPositionInArray = library.findIndex(
     (b) => b.title === `${book.title}`
   );
+  let readIcon = book.isRead
+    ? "img/eye-check-outline.svg"
+    : "img/eye-remove-outline.svg";
   const friendlyDate = convertDateToFriendlyDate(book.dateAdded);
   const bookElement = document.createElement("tr");
   bookElement.classList.add("book");
@@ -95,6 +104,7 @@ const addABookToPage = function (book) {
   <td>${book.genre}</td>
   <td class="number">${book.pageCount}</td>
   <td class="number">${friendlyDate}</td>
+  <img class="svg read-btn ${book.isRead}" src=${readIcon}>
   <img class="svg delete-btn" src="img/book-remove.svg">
   `;
   bookContainer.appendChild(bookElement);
@@ -190,6 +200,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.classList.contains("delete-btn")) {
       let bookToRemove = e.target.parentElement.dataset.arrayPosition;
       removeBookFromLibrary(bookToRemove);
+      addBooksInLibraryToPage();
+    }
+
+    if (e.target.classList.contains("read-btn")) {
+      let bookToRemove = e.target.parentElement.dataset.arrayPosition;
+      toggleReadStatus(bookToRemove);
       addBooksInLibraryToPage();
     }
   });

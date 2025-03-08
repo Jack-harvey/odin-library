@@ -1,8 +1,5 @@
 const mainElement = document.querySelector("body");
-const toolbarEl = document.querySelector("toolbar");
 const formElement = document.querySelector("#newBookForm");
-const openModalButton = document.querySelector(".open-modal");
-const closeModalButton = document.querySelector(".close-modal");
 const bookContainer = document.querySelector(".book-container");
 const newBookModal = document.querySelector("#newBookModal");
 const tableHead = document.querySelector(".table-head");
@@ -20,12 +17,6 @@ const Book = function (title, author, genre, pageCount, read = false) {
 
 const convertDateToFriendlyDate = function convertDateToFriendlyDate(date) {
   return date.format("DD/MM/YYYY");
-};
-
-const formValidator = function formValidator(title, author, genre, pageCount) {
-  if (title === "" || author === "" || genre === "" || isNaN(pageCount)) {
-    return false;
-  } else return true;
 };
 
 const addBookToLibrary = function (title, author, genre, pageCount) {
@@ -61,10 +52,14 @@ const bookFormSubmit = function (event) {
   let genreSubmit = document.getElementsByName("genre")[0].value;
   let pageCountSubmit = document.getElementsByName("page-count")[0].value;
 
-  if (formValidator(titleSubmit, authorSubmit, genreSubmit, pageCountSubmit)) {
-    addBookToLibrary(titleSubmit, authorSubmit, genreSubmit, pageCountSubmit);
-  }
+  addBookToLibrary(titleSubmit, authorSubmit, genreSubmit, pageCountSubmit);
   addBooksInLibraryToPage();
+};
+
+const sanitizeText = function (string) {
+  var temp = document.createElement("div");
+  temp.textContent = string;
+  return temp.innerHTML;
 };
 
 const addTableHeaderToPage = function () {
@@ -79,12 +74,6 @@ const addTableHeaderToPage = function () {
   <td>&nbsp;</td>
   `;
   bookContainer.appendChild(tableHeadEl);
-};
-
-const sanitizeText = function (string) {
-  var temp = document.createElement("div");
-  temp.textContent = string;
-  return temp.innerHTML;
 };
 
 const addABookToPage = function (book) {

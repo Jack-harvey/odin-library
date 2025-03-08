@@ -15,6 +15,10 @@ const Book = function (title, author, genre, pageCount, read = false) {
   this.isRead = read;
 };
 
+Book.prototype.toggleReadStatus = function () {
+  this.isRead = this.isRead ? false : true;
+};
+
 const convertDateToFriendlyDate = function convertDateToFriendlyDate(date) {
   return date.format("DD/MM/YYYY");
 };
@@ -30,12 +34,14 @@ const addBookToLibrary = function (title, author, genre, pageCount) {
   );
 };
 
-const removeBookFromLibrary = function (arrayPosition) {
-  library.splice(arrayPosition, 1);
+const removeBookFromLibrary = function (bookId) {
+  let bookIndex = library.findIndex((book) => book.id == bookId);
+  library.splice(bookIndex, 1);
 };
 
-const toggleReadStatus = function (arrayPosition) {
-  library[arrayPosition].isRead = library[arrayPosition].isRead ? false : true;
+const toggleReadStatus = function (bookId) {
+  let book = library.find((book) => book.id == bookId);
+  book.toggleReadStatus();
 };
 
 const appendLongNames = function (name) {
@@ -86,7 +92,7 @@ const addABookToPage = function (book) {
   const friendlyDate = convertDateToFriendlyDate(book.dateAdded);
   const bookElement = document.createElement("tr");
   bookElement.classList.add("book");
-  bookElement.dataset.arrayPosition = booksPositionInArray;
+  bookElement.dataset.id = book.id;
   bookElement.innerHTML = `
   <td>${appendLongNames(book.title)}</td>
   <td>${appendLongNames(book.author)}</td>
@@ -187,14 +193,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   bookContainer.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete-btn")) {
-      let bookToRemove = e.target.parentElement.dataset.arrayPosition;
-      removeBookFromLibrary(bookToRemove);
+      let bookId = e.target.parentElement.dataset.id;
+      removeBookFromLibrary(bookId);
       addBooksInLibraryToPage();
     }
 
     if (e.target.classList.contains("read-btn")) {
-      let bookToRemove = e.target.parentElement.dataset.arrayPosition;
-      toggleReadStatus(bookToRemove);
+      let bookId = e.target.parentElement.dataset.id;
+      toggleReadStatus(bookId);
       addBooksInLibraryToPage();
     }
   });

@@ -5,15 +5,17 @@ const newBookModal = document.querySelector("#newBookModal");
 const tableHead = document.querySelector(".table-head");
 const library = [];
 
-const Book = function (title, author, genre, pageCount, read = false) {
-  this.title = title;
-  this.author = author;
-  this.genre = genre;
-  this.pageCount = pageCount;
-  this.dateAdded = dayjs();
-  this.id = crypto.randomUUID();
-  this.isRead = read;
-};
+class Book {
+  constructor(title, author, genre, pageCount, read = false) {
+    this.title = title;
+    this.author = author;
+    this.genre = genre;
+    this.pageCount = pageCount;
+    this.dateAdded = dayjs();
+    this.id = crypto.randomUUID();
+    this.isRead = read;
+  }
+}
 
 Book.prototype.toggleReadStatus = function () {
   this.isRead = this.isRead ? false : true;
@@ -24,14 +26,7 @@ const convertDateToFriendlyDate = function convertDateToFriendlyDate(date) {
 };
 
 const addBookToLibrary = function (title, author, genre, pageCount) {
-  library.push(
-    new Book(
-      sanitizeText(title),
-      sanitizeText(author),
-      sanitizeText(genre),
-      pageCount
-    )
-  );
+  library.push(new Book(sanitizeText(title), sanitizeText(author), sanitizeText(genre), pageCount));
 };
 
 const removeBookFromLibrary = function (bookId) {
@@ -83,12 +78,8 @@ const addTableHeaderToPage = function () {
 };
 
 const addABookToPage = function (book) {
-  let booksPositionInArray = library.findIndex(
-    (b) => b.title === `${book.title}`
-  );
-  let readIcon = book.isRead
-    ? "img/eye-check-outline.svg"
-    : "img/eye-remove-outline.svg";
+  let booksPositionInArray = library.findIndex((b) => b.title === `${book.title}`);
+  let readIcon = book.isRead ? "img/eye-check-outline.svg" : "img/eye-remove-outline.svg";
   const friendlyDate = convertDateToFriendlyDate(book.dateAdded);
   const bookElement = document.createElement("tr");
   bookElement.classList.add("book");
@@ -125,12 +116,7 @@ const addALotOfBooksToThePage = function () {
   addBookToLibrary("Pride and Prejudice", "Jane Austen", "Romance", 279);
   addBookToLibrary("The Catcher in the Rye", "J.D. Salinger", "Fiction", 277);
   addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310);
-  addBookToLibrary(
-    "Harry Potter and the Sorcerer's Stone",
-    "J.K. Rowling",
-    "Fantasy",
-    309
-  );
+  addBookToLibrary("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", "Fantasy", 309);
   addBookToLibrary("The Hunger Games", "Suzanne Collins", "Dystopian", 374);
   addBookToLibrary("The Da Vinci Code", "Dan Brown", "Mystery", 454);
   addBookToLibrary("The Alchemist", "Paulo Coelho", "Adventure", 208);
@@ -146,29 +132,14 @@ const addALotOfBooksToThePage = function () {
   addBookToLibrary("Brave New World", "Aldous Huxley", "Dystopian", 311);
   addBookToLibrary("The Road", "Cormac McCarthy", "Post-apocalyptic", 287);
   addBookToLibrary("The Giver", "Lois Lowry", "Dystopian", 179);
-  addBookToLibrary(
-    "The Secret Garden",
-    "Frances Hodgson Burnett",
-    "Children's",
-    331
-  );
+  addBookToLibrary("The Secret Garden", "Frances Hodgson Burnett", "Children's", 331);
   addBookToLibrary("The Help", "Kathryn Stockett", "Historical Fiction", 522);
-  addBookToLibrary(
-    "A Tale of Two Cities",
-    "Charles Dickens",
-    "Historical Fiction",
-    489
-  );
+  addBookToLibrary("A Tale of Two Cities", "Charles Dickens", "Historical Fiction", 489);
   addBookToLibrary("The Outsiders", "S.E. Hinton", "Young Adult", 192);
   addBookToLibrary("The Night Circus", "Erin Morgenstern", "Fantasy", 387);
   addBookToLibrary("Little Women", "Louisa May Alcott", "Fiction", 759);
   addBookToLibrary("Fifty Shades of Grey", "E.L. James", "Romance", 514);
-  addBookToLibrary(
-    "The Kite Runner",
-    "Khaled Hosseini",
-    "Historical Fiction",
-    371
-  );
+  addBookToLibrary("The Kite Runner", "Khaled Hosseini", "Historical Fiction", 371);
 };
 
 document.addEventListener("DOMContentLoaded", () => {

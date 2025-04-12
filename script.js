@@ -11,6 +11,40 @@ class Book {
     book.isRead = this.isRead ? false : true;
   }
 
+  static addALotOfBooksToThePage() {
+    Library.addBook("The Great Gatsby", "F. Scott Fitzgerald", "Fiction", 218);
+    Library.addBook("To Kill a Mockingbird", "Harper Lee", "Fiction", 281);
+    Library.addBook("1984", "George Orwell", "Dystopian", 328);
+    Library.addBook("Moby-Dick", "Herman Melville", "Adventure", 635);
+    Library.addBook("Pride and Prejudice", "Jane Austen", "Romance", 279);
+    Library.addBook("The Catcher in the Rye", "J.D. Salinger", "Fiction", 277);
+    Library.addBook("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310);
+    Library.addBook("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", "Fantasy", 309);
+    Library.addBook("The Hunger Games", "Suzanne Collins", "Dystopian", 374);
+    Library.addBook("The Da Vinci Code", "Dan Brown", "Mystery", 454);
+    Library.addBook("The Alchemist", "Paulo Coelho", "Adventure", 208);
+    Library.addBook("The Fault in Our Stars", "John Green", "Young Adult", 313);
+    Library.addBook("The Chronicles of Narnia", "C.S. Lewis", "Fantasy", 778);
+    Library.addBook("The Lord of the Rings", "J.R.R. Tolkien", "Fantasy", 1178);
+    Library.addBook("A Game of Thrones", "George R.R. Martin", "Fantasy", 694);
+    Library.addBook("The Shining", "Stephen King", "Horror", 659);
+    Library.addBook("The Book Thief", "Markus Zusak", "Historical Fiction", 584);
+    Library.addBook("The Girl on the Train", "Paula Hawkins", "Thriller", 395);
+    Library.addBook("Gone Girl", "Gillian Flynn", "Thriller", 432);
+    Library.addBook("Catch-22", "Joseph Heller", "Satire", 453);
+    Library.addBook("Brave New World", "Aldous Huxley", "Dystopian", 311);
+    Library.addBook("The Road", "Cormac McCarthy", "Post-apocalyptic", 287);
+    Library.addBook("The Giver", "Lois Lowry", "Dystopian", 179);
+    Library.addBook("The Secret Garden", "Frances Hodgson Burnett", "Children's", 331);
+    Library.addBook("The Help", "Kathryn Stockett", "Historical Fiction", 522);
+    Library.addBook("A Tale of Two Cities", "Charles Dickens", "Historical Fiction", 489);
+    Library.addBook("The Outsiders", "S.E. Hinton", "Young Adult", 192);
+    Library.addBook("The Night Circus", "Erin Morgenstern", "Fantasy", 387);
+    Library.addBook("Little Women", "Louisa May Alcott", "Fiction", 759);
+    Library.addBook("Fifty Shades of Grey", "E.L. James", "Romance", 514);
+    Library.addBook("The Kite Runner", "Khaled Hosseini", "Historical Fiction", 371);
+  }
+
   constructor(title, author, genre, pageCount, read = false) {
     this.title = title;
     this.author = author;
@@ -110,39 +144,9 @@ const clearAllBooksFromPage = function () {
   }
 };
 
-const addALotOfBooksToThePage = function () {
-  Library.addBook("The Great Gatsby", "F. Scott Fitzgerald", "Fiction", 218);
-  Library.addBook("To Kill a Mockingbird", "Harper Lee", "Fiction", 281);
-  Library.addBook("1984", "George Orwell", "Dystopian", 328);
-  Library.addBook("Moby-Dick", "Herman Melville", "Adventure", 635);
-  Library.addBook("Pride and Prejudice", "Jane Austen", "Romance", 279);
-  Library.addBook("The Catcher in the Rye", "J.D. Salinger", "Fiction", 277);
-  Library.addBook("The Hobbit", "J.R.R. Tolkien", "Fantasy", 310);
-  Library.addBook("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", "Fantasy", 309);
-  Library.addBook("The Hunger Games", "Suzanne Collins", "Dystopian", 374);
-  Library.addBook("The Da Vinci Code", "Dan Brown", "Mystery", 454);
-  Library.addBook("The Alchemist", "Paulo Coelho", "Adventure", 208);
-  Library.addBook("The Fault in Our Stars", "John Green", "Young Adult", 313);
-  Library.addBook("The Chronicles of Narnia", "C.S. Lewis", "Fantasy", 778);
-  Library.addBook("The Lord of the Rings", "J.R.R. Tolkien", "Fantasy", 1178);
-  Library.addBook("A Game of Thrones", "George R.R. Martin", "Fantasy", 694);
-  Library.addBook("The Shining", "Stephen King", "Horror", 659);
-  Library.addBook("The Book Thief", "Markus Zusak", "Historical Fiction", 584);
-  Library.addBook("The Girl on the Train", "Paula Hawkins", "Thriller", 395);
-  Library.addBook("Gone Girl", "Gillian Flynn", "Thriller", 432);
-  Library.addBook("Catch-22", "Joseph Heller", "Satire", 453);
-  Library.addBook("Brave New World", "Aldous Huxley", "Dystopian", 311);
-  Library.addBook("The Road", "Cormac McCarthy", "Post-apocalyptic", 287);
-  Library.addBook("The Giver", "Lois Lowry", "Dystopian", 179);
-  Library.addBook("The Secret Garden", "Frances Hodgson Burnett", "Children's", 331);
-  Library.addBook("The Help", "Kathryn Stockett", "Historical Fiction", 522);
-  Library.addBook("A Tale of Two Cities", "Charles Dickens", "Historical Fiction", 489);
-  Library.addBook("The Outsiders", "S.E. Hinton", "Young Adult", 192);
-  Library.addBook("The Night Circus", "Erin Morgenstern", "Fantasy", 387);
-  Library.addBook("Little Women", "Louisa May Alcott", "Fiction", 759);
-  Library.addBook("Fifty Shades of Grey", "E.L. James", "Romance", 514);
-  Library.addBook("The Kite Runner", "Khaled Hosseini", "Historical Fiction", 371);
-};
+class WebForm {
+  constructor() {}
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   addBooksInLibraryToPage();
@@ -179,4 +183,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-addALotOfBooksToThePage();
+Book.addALotOfBooksToThePage();

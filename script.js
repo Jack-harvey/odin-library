@@ -59,12 +59,7 @@ class Book {
 class Library {
   static addBook(title, author, genre, pageCount) {
     library.push(
-      new Book(
-        WebForm.sanitizeText(title),
-        WebForm.sanitizeText(author),
-        WebForm.sanitizeText(genre),
-        pageCount
-      )
+      new Book(sanitizeText(title), sanitizeText(author), sanitizeText(genre), pageCount)
     );
   }
 
@@ -80,84 +75,80 @@ const convertDateToFriendlyDate = function convertDateToFriendlyDate(date) {
   return date.format("DD/MM/YYYY");
 };
 
-class WebForm {
-  static clearAllBooksFromPage() {
-    while (bookContainer.firstChild) {
-      bookContainer.removeChild(bookContainer.lastChild);
-    }
+const appendLongNames = function (name) {
+  if (name.length <= 16) {
+    return name;
   }
+  shortName = name.substring(0, 13) + "...";
+  return shortName;
+};
 
-  static addBooksInLibraryToPage() {
-    WebForm.clearAllBooksFromPage();
-    WebForm.addTableHeaderToPage();
-    library.forEach((book) => WebForm.addABookToPage(book));
+const bookFormSubmit = function (event) {
+  let titleSubmit = document.getElementsByName("title")[0].value;
+  let authorSubmit = document.getElementsByName("author")[0].value;
+  let genreSubmit = document.getElementsByName("genre")[0].value;
+  let pageCountSubmit = document.getElementsByName("page-count")[0].value;
+
+  Library.addBook(titleSubmit, authorSubmit, genreSubmit, pageCountSubmit);
+  addBooksInLibraryToPage();
+};
+
+const sanitizeText = function (string) {
+  var temp = document.createElement("div");
+  temp.textContent = string;
+  return temp.innerHTML;
+};
+
+const addTableHeaderToPage = function () {
+  const tableHeadEl = document.createElement("tr");
+  tableHeadEl.classList.add("table-head");
+  tableHeadEl.innerHTML = `
+  <td>Title</td>
+  <td>Author</td>
+  <td>Genre</td>
+  <td class="number">Page Count</td>
+  <td class="number">Date Added</td>
+  <td>&nbsp;</td>
+  `;
+  bookContainer.appendChild(tableHeadEl);
+};
+
+const addABookToPage = function (book) {
+  let booksPositionInArray = library.findIndex((b) => b.title === `${book.title}`);
+  let readIcon = book.isRead ? "img/eye-check-outline.svg" : "img/eye-remove-outline.svg";
+  const friendlyDate = convertDateToFriendlyDate(book.dateAdded);
+  const bookElement = document.createElement("tr");
+  bookElement.classList.add("book");
+  bookElement.dataset.id = book.id;
+  bookElement.innerHTML = `
+  <td>${appendLongNames(book.title)}</td>
+  <td>${appendLongNames(book.author)}</td>
+  <td>${book.genre}</td>
+  <td class="number">${book.pageCount}</td>
+  <td class="number">${friendlyDate}</td>
+  <img class="svg read-btn ${book.isRead}" src=${readIcon}>
+  <img class="svg delete-btn" src="img/book-remove.svg">
+  `;
+  bookContainer.appendChild(bookElement);
+};
+
+const addBooksInLibraryToPage = function () {
+  clearAllBooksFromPage();
+  addTableHeaderToPage();
+  library.forEach((book) => addABookToPage(book));
+};
+
+const clearAllBooksFromPage = function () {
+  while (bookContainer.firstChild) {
+    bookContainer.removeChild(bookContainer.lastChild);
   }
-
-  static addABookToPage(book) {
-    //let booksPositionInArray = library.findIndex((b) => b.title === `${book.title}`);
-    let readIcon = book.isRead ? "img/eye-check-outline.svg" : "img/eye-remove-outline.svg";
-    const friendlyDate = convertDateToFriendlyDate(book.dateAdded);
-    const bookElement = document.createElement("tr");
-    bookElement.classList.add("book");
-    bookElement.dataset.id = book.id;
-    bookElement.innerHTML = `
-    <td>${WebForm.appendLongNames(book.title)}</td>
-    <td>${WebForm.appendLongNames(book.author)}</td>
-    <td>${book.genre}</td>
-    <td class="number">${book.pageCount}</td>
-    <td class="number">${friendlyDate}</td>
-    <img class="svg read-btn ${book.isRead}" src=${readIcon}>
-    <img class="svg delete-btn" src="img/book-remove.svg">
-    `;
-    bookContainer.appendChild(bookElement);
-  }
-
-  static addTableHeaderToPage() {
-    const tableHeadEl = document.createElement("tr");
-    tableHeadEl.classList.add("table-head");
-    tableHeadEl.innerHTML = `
-    <td>Title</td>
-    <td>Author</td>
-    <td>Genre</td>
-    <td class="number">Page Count</td>
-    <td class="number">Date Added</td>
-    <td>&nbsp;</td>
-    `;
-    bookContainer.appendChild(tableHeadEl);
-  }
-
-  static sanitizeText(string) {
-    var temp = document.createElement("div");
-    temp.textContent = string;
-    return temp.innerHTML;
-  }
-
-  static bookFormSubmit(event) {
-    let titleSubmit = document.getElementsByName("title")[0].value;
-    let authorSubmit = document.getElementsByName("author")[0].value;
-    let genreSubmit = document.getElementsByName("genre")[0].value;
-    let pageCountSubmit = document.getElementsByName("page-count")[0].value;
-
-    Library.addBook(titleSubmit, authorSubmit, genreSubmit, pageCountSubmit);
-    WebForm.addBooksInLibraryToPage();
-  }
-
-  static appendLongNames(name) {
-    if (name.length <= 16) {
-      return name;
-    }
-    let shortName = name.substring(0, 13) + "...";
-    return shortName;
-  }
-
-  constructor() {}
-}
+};
 
 document.addEventListener("DOMContentLoaded", () => {
-  WebForm.addBooksInLibraryToPage();
+  addBooksInLibraryToPage();
 
   formElement.addEventListener("submit", (e) => {
-    WebForm.bookFormSubmit(e);
+    bookFormSubmit(e);
     formElement.reset();
   });
 
@@ -177,13 +168,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.classList.contains("delete-btn")) {
       let bookId = e.target.parentElement.dataset.id;
       Library.removeBook(bookId);
-      WebForm.addBooksInLibraryToPage();
+      addBooksInLibraryToPage();
     }
 
     if (e.target.classList.contains("read-btn")) {
       let bookId = e.target.parentElement.dataset.id;
       Book.toggleReadStatus(bookId);
-      WebForm.addBooksInLibraryToPage();
+      addBooksInLibraryToPage();
     }
   });
 });
